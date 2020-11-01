@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: kafka-consumer
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      group-id: ${spring.application.name}
+      auto-offset-reset: latest
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring:
+          json:
+            value:
+              default:
+                type: com.pedrocomitto.poc.kafkaconsumer.event.SimpleEvent
+
+
+simple-topic: simple.topic
+
+
+
+
+
+
+
+
+
